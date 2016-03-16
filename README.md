@@ -1,6 +1,6 @@
 # LLDB Eigen Data Formatter
 
-LLDB Data Formatter for dense matrices and vectors of the Eigen library.
+LLDB Data Formatter for dense matrices and vectors of the [Eigen](http://eigen.tuxfamily.org) library.
 
 ## Installation
 
