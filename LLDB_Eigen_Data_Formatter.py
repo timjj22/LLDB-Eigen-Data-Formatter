@@ -1,9 +1,8 @@
-#type summary add -P -x "Eigen::"
 import lldb
 import os
 
 def __lldb_init_module (debugger, dict):
-    debugger.HandleCommand("type summary add -x \"Eigen::\" -F EigenDataFormater.format")
+    debugger.HandleCommand("type summary add -x \"Eigen::\" -F LLDB_Eigen_Data_Formatter.format")
 
 # Define a context manager to suppress stdout and stderr.
 #  see http://stackoverflow.com/questions/11130156/suppress-stdout-stderr-print-from-python-functions
