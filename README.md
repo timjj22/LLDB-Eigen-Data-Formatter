@@ -2,6 +2,25 @@
 
 LLDB Data Formatter for dense matrices and vectors of the [Eigen](http://eigen.tuxfamily.org) library.
 
+## Example
+
+```cpp
+Eigen::Matrix<double, 3, 3> A;
+A << 1, 0, 0,
+	 0, 2, 0,
+	 0, 0, 3;
+```
+
+Corresponding output in LLDB
+
+```
+(lldb) print A
+(Eigen::Matrix<double, 3, 3, 0, 3, 3>) $11 = rows: 3, cols: 3
+[ 1 0 0;
+  0 2 0;
+  0 0 3 ]
+```
+
 ## Installation
 
 ```bash
@@ -23,25 +42,6 @@ rm -fr .lldb-eigen-data-formatter
 ```
 
 Afterwards remove the `command script import` command in `~/.lldbinit`.
-
-## Example
-
-```cpp
-Eigen::Matrix<double, 3, 3> A;
-A << 1, 0, 0,
-	 0, 2, 0,
-	 0, 0, 3;
-```
-
-Corresponding output in LLDB
-
-```
-(lldb) print A
-(Eigen::Matrix<double, 3, 3, 0, 3, 3>) $11 = rows: 3, cols: 3
-[ 1 0 0;
-  0 2 0;
-  0 0 3 ]
-```
 
 ## License
 
