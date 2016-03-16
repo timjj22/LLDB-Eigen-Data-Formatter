@@ -8,4 +8,6 @@ LLDB Data Formatter for dense matrices and vectors of the Eigen library.
 
 ## License
 
-GNU GENERAL PUBLIC LICENSE
+Copyright © 2016 Till Ehrengruber
+
+Distributed under the GNU GENERAL PUBLIC LICENSE.
