@@ -6,6 +6,12 @@ LLDB Data Formatter for dense matrices and vectors of the Eigen library.
 
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/tehrengruber/LLDB-Eigen-Data-Formatter/master/tools/install.sh)"
 
+__Manual Installation__
+
+	INSTALL_PATH=~/.lldb-eigen-data-formatter
+	git clone https://github.com/tehrengruber/LLDB-Eigen-Data-Formatter.git $INSTALL_PATH
+	echo 'command script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
+
 ## License
 
 Copyright © 2016 Till Ehrengruber
