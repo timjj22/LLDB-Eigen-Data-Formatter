@@ -16,6 +16,14 @@ git clone https://github.com/tehrengruber/LLDB-Eigen-Data-Formatter.git $INSTALL
 echo 'command script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
 ```
 
+__Uninstallation__
+
+```bash
+rm -fr .lldb-eigen-data-formatter
+```
+
+Afterwards remove the `command script import` command in `~/.lldbinit`.
+
 ## License
 
 Copyright © 2016 Till Ehrengruber
