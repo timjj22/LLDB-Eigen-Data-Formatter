@@ -38,7 +38,7 @@ echo 'command script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~
 __Uninstallation__
 
 ```bash
-rm -fr .lldb-eigen-data-formatter
+rm -fr ~/.lldb-eigen-data-formatter
 ```
 
 Afterwards remove the `command script import` command in `~/.lldbinit`.
