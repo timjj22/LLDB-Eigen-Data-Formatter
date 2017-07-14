@@ -67,10 +67,10 @@ fancy_heading "------------------------------------------------------------"
 fancy_heading "    LLDB Eigen Data Formatter"
 fancy_heading "------------------------------------------------------------"
 fancy_heading " Contact"
-fancy_heading "   Till Ehrengruber"
-fancy_heading "   till@ehrengruber.ch"
+fancy_heading "   Timothy Jeruzalski"
+fancy_heading "   timjj22@gmail.com"
 fancy_heading " Documentation"
-fancy_heading "   https://github.com/tehrengruber/LLDB-Eigen-Data-Formatter"
+fancy_heading "   https://github.com/timjj22/LLDB-Eigen-Data-Formatter"
 fancy_heading "------------------------------------------------------------"
 fancy_sep;
 
@@ -91,7 +91,7 @@ ALREADY_INSTALLED=$?
 trap error_handler Err
 notice "Adding data formatter to ~/.lldbinit"
 if [ ! $ALREADY_INSTALLED -eq 0 ]; then
-	echo 'command script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
+	echo '\ncommand script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
 else
 	notice "Skipping"
 fi
