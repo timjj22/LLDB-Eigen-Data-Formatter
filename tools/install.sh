@@ -91,7 +91,7 @@ ALREADY_INSTALLED=$?
 trap error_handler Err
 notice "Adding data formatter to ~/.lldbinit"
 if [ ! $ALREADY_INSTALLED -eq 0 ]; then
-	echo '\ncommand script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
+	echo -e '\ncommand script import "'$INSTALL_PATH'/LLDB_Eigen_Data_Formatter.py"' >> ~/.lldbinit
 else
 	notice "Skipping"
 fi
