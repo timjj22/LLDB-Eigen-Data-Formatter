@@ -80,7 +80,7 @@ if [ -d "$INSTALL_PATH" ]; then
 fi
 
 notice "Downloading files"
-git clone -q https://github.com/tehrengruber/LLDB-Eigen-Data-Formatter.git $INSTALL_PATH
+git clone -q https://github.com/timjj22/LLDB-Eigen-Data-Formatter.git $INSTALL_PATH
 
 #
 # Add to lldbinit
