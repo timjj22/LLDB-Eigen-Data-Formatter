@@ -84,7 +84,7 @@ def format (valobj,internal_dict):
     else:
         for j in range(0, min(rows, max_element_count)):
             for i in range(0, min(cols, max_element_count)):
-                padding = max(padding, len(str(data.GetChildAtIndex(i * cols + j, 0, True).GetValue())))
+                padding = max(padding, len(str(data.GetChildAtIndex(j + i*rows, 0, True).GetValue())))
 
     # print values
     for j in range(0,min(rows, max_element_count)):
@@ -92,7 +92,7 @@ def format (valobj,internal_dict):
             output += "\n["
         for i in range(0,min(cols, max_element_count)):
             #val = data.GetChildAtIndex(j+i*cols, lldb.eNoDynamicValues, True).GetValue()
-            output += data.GetChildAtIndex(j+i*cols, 0, True).GetValue().rjust(padding+1, ' ')
+            output += data.GetChildAtIndex(i*rows + j, 0, True).GetValue().rjust(padding+1, ' ')
         
         if j!=rows-1:
             output += " ]\n["
