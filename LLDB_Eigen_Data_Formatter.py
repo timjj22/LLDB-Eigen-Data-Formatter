@@ -30,10 +30,7 @@ def evaluate_expression(valobj, expr):
     return valobj.GetProcess().GetSelectedThread().GetSelectedFrame().EvaluateExpression(expr)    
 
 def format (valobj,internal_dict):
-    
-    # Print out the previous data as well
-    print(str(valobj.GetValueForExpressionPath("")))
-        
+            
     # fetch data (For fixed sized arrays only)
     data = valobj.GetValueForExpressionPath(".m_storage.m_data.array")
     num_data_elements = data.GetNumChildren()
@@ -45,21 +42,27 @@ def format (valobj,internal_dict):
         #num_data_elements = valobj.GetValueForExpressionPath(".m_storage.m_rows").GetValueAsSigned() * valobj.GetValueForExpressionPath(".m_storage.m_cols").GetValueAsSigned()
         is_fixed_size = 0
 
-
     # determine expression path of the current valobj
     stream = lldb.SBStream()
     valobj.GetExpressionPath(stream)
     valobj_expression_path = stream.GetData()
-    
+
     # determine rows and cols
-    rows = cols = 0
+    rows = cols = rowmajor = 0
     with suppress_stdout_stderr():
         rows = evaluate_expression(valobj, valobj_expression_path+".rows()").GetValueAsSigned()
         cols = evaluate_expression(valobj, valobj_expression_path+".cols()").GetValueAsSigned()
-        #rows = lldb.frame.EvaluateExpression(valobj_expression_path+".rows()").GetValueAsSigned()
-        #cols = lldb.frame.EvaluateExpression(valobj_expression_path+".cols()").GetValueAsSigned()
-        
-        #print(valobj.CreateValueFromExpression("bla", valobj_expression_path+".rows()"))
+
+        # very limited way to check if RowMajor - simple string ops on the template description
+        # isn't a flag for Eigen when compiled without copying and analysing
+        angle_split_var_description = str(valobj).split('<')
+
+        # find the part which specifies the template args. "Eigen::type<type, rows, cols, RowMajor, ...>"
+        for part in angle_split_var_description:
+            if part.find('Eigen::') == -1 and part.find(',') > 0:
+                comma_split_var_description = part.split(',')
+                break
+        rowmajor = int(comma_split_var_description[3])
     
     output = ""
 
@@ -71,7 +74,7 @@ def format (valobj,internal_dict):
       rows = num_data_elements
 
     # print matrix dimensions
-    output += "rows: " + str(rows) + ", cols: " + str(cols)
+    output += "rows: " + str(rows) + ", cols: " + str(cols) + ", RowMajor: " + str(rowmajor)
 
     # determine padding
     padding = 1
@@ -91,8 +94,10 @@ def format (valobj,internal_dict):
         if j is 0:
             output += "\n["
         for i in range(0,min(cols, max_element_count)):
-            #val = data.GetChildAtIndex(j+i*cols, lldb.eNoDynamicValues, True).GetValue()
-            output += data.GetChildAtIndex(i*rows + j, 0, True).GetValue().rjust(padding+1, ' ')
+            if rowmajor:
+                output += data.GetChildAtIndex(i + j*cols, 0, True).GetValue().rjust(padding+1, ' ')
+            else:
+                output += data.GetChildAtIndex(i*rows + j, 0, True).GetValue().rjust(padding+1, ' ')
         
         if j!=rows-1:
             output += " ]\n["
