@@ -91,7 +91,7 @@ def format (valobj,internal_dict):
 
     # print values
     for j in range(0,min(rows, max_element_count)):
-        if j is 0:
+        if j == 0:
             output += "\n["
         for i in range(0,min(cols, max_element_count)):
             if rowmajor:
@@ -99,7 +99,7 @@ def format (valobj,internal_dict):
             else:
                 output += data.GetChildAtIndex(i*rows + j, 0, True).GetValue().rjust(padding+1, ' ')
         
-        if j!=rows-1:
+        if j != rows-1:
             output += " ]\n["
         if j == rows-1:
             output += " ]"
